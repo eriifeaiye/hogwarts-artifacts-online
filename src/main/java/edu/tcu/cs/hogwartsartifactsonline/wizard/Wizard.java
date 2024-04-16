@@ -1,7 +1,6 @@
 package edu.tcu.cs.hogwartsartifactsonline.wizard;
 
 import edu.tcu.cs.hogwartsartifactsonline.artifact.Artifact;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -46,6 +45,7 @@ public class Wizard implements Serializable {
     }
 
     public void setArtifacts(List<Artifact> artifacts) {
+
         this.artifacts = artifacts;
     }
 
@@ -61,6 +61,12 @@ public class Wizard implements Serializable {
     public void removeAllArtifacts() {
         this.artifacts.stream().forEach(artifact -> artifact.setOwner(null));
         this.artifacts = null;
+    }
+
+    public void removeArtifact(Artifact artifactToBeAssigned) {
+        // Remove artifact owner.
+        artifactToBeAssigned.setOwner(null);
+        this.artifacts.remove(artifactToBeAssigned);
     }
 
 }
